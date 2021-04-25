@@ -56,6 +56,10 @@ variable "hub_sub_addpre" {
   type = list
 }
 
+variable "gateway_sub_name" {
+  type= string
+}
+
 variable "op_sub_name" {
   type  = string
 }
@@ -84,32 +88,65 @@ variable "spoke2_sub_addpre" {
   type = list
 }
 
-variable "vng_publicip_alloc_method" {
+### HUB PUBLIC IP
+variable "hub_vng_publicip_name" {
   type = string
 }
-variable "vng_publicip_name" {
+
+variable "hub_vng_publicip_alloc_method" {
   type = string
 }
-/*
-variable "mv_vng_name" {
+
+### HUB VNG CONFIG
+
+variable "hub_vng_vpn_gateway_name" {
   type = string
 }
-variable "mv_vng_loc" {
+variable "hub_vng_sku" {
   type = string
 }
-variable "mv_vng_rg" {
+variable "hub_vng_type" {
   type = string
 }
-variable "mv_vng_sku" {
+variable "hub_vpn_type" {
   type = string
 }
-variable "mv_vng_type" {
+variable "hub_vng_active_active" {
   type = string
 }
-variable "mv_vng_vpn_type" {
+variable "hub_vng_bgp" {
   type = string
 }
-*/
+
+### OP PUBLIC IP
+variable "op_vng_publicip_name" {
+  type = string
+}
+
+variable "op_vng_publicip_alloc_method" {
+  type = string
+}
+
+### OP VNG CONFIG
+variable "op_vng_vpn_gateway_name" {
+  type = string
+}
+variable "op_vng_sku" {
+  type = string
+}
+variable "op_vng_type" {
+  type = string
+}
+variable "op_vpn_type" {
+  type = string
+}
+variable "op_vng_active_active" {
+  type = string
+}
+variable "op_vng_bgp" {
+  type = string
+}
+
 /*
     mv_vng_name     = "hub-gateway"
     mv_vng_loc      = module.rg.resource_group_loc

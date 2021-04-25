@@ -23,7 +23,7 @@ module "hub_subnet" {
     mv_sub_vnet         = module.hub_vnet.virtual_network_name
 }
 
-/*
+
 module "gateway_subnet" {
   source = "./modules/subnet"
     mv_sub_name         = var.gateway_sub_name
@@ -32,7 +32,7 @@ module "gateway_subnet" {
     mv_sub_addpre       = var.gateway_sub_addpre
     mv_sub_vnet         = module.hub_vnet.virtual_network_name
 }
-*/
+
 module "op_vnet" {
   source = "./modules/vnet"
     mv_vnet_name        = var.op_vnet_name
@@ -122,26 +122,46 @@ module "hub-spoke3peering" {
 }
 
 
-module "publicip" {
+module "hub_publicip" {
   source = "./modules/publicip"
-    mv_publicip_name            = var.vng_publicip_name
+    mv_publicip_name            = var.hub_vng_publicip_name
     mv_publicip_loc             = module.rg.resource_group_loc
     mv_publicip_rg              = module.rg.resource_group_name
-    mv_publicip_alloc_method    = var.vng_publicip_alloc_method
+    mv_publicip_alloc_method    = var.hub_vng_publicip_alloc_method
 }
 
-/*
-module "vnetgateway" {
+module "op_publicip" {
+  source = "./modules/publicip"
+    mv_publicip_name            = var.op_vng_publicip_name
+    mv_publicip_loc             = module.rg.resource_group_loc
+    mv_publicip_rg              = module.rg.resource_group_name
+    mv_publicip_alloc_method    = var.op_vng_publicip_alloc_method
+}
+
+module "hub-vnetgateway" {
   source = "./modules/vnetgateway"
-    mv_vng_name     = "hub-gateway"
+    mv_vng_name     = var.hub_vng_vpn_gateway_name
     mv_vng_loc      = module.rg.resource_group_loc
     mv_vng_rg       = module.rg.resource_group_name
-    mv_vng_sku      = "Basic"
-    mv_vng_type     = "Vpn"
-    mv_vng_vpn_type = "RouteBased"
-    mv_publicip_gateway_config  = "vnetGatewayConfig"
-    mv_publicip_address_id      = module.publicip.publicip_id
-    mv_publicip_add_alloc       = "Dynamic"
-    mv_publicip_subnet          = module.gateway_subnet.subnet_id
+    mv_vng_sku      = var.hub_vng_sku
+    mv_vng_type     = var.hub_vng_type
+    mv_vng_vpn_type = var.hub_vpn_type
+    mv_vng_active_active = var.hub_vng_active_active
+    mv_vng_bgp           = var.hub_vng_bgp
+    mv_vng_publicip_address_id      = module.hub_publicip.publicip_id
+    mv_vng_gateway_subnetid          = module.gateway_subnet.subnet_id
 }
-*/
+
+module "op-vnetgateway" {
+  source = "./modules/vnetgateway"
+    mv_vng_name     = var.op_vng_vpn_gateway_name
+    mv_vng_loc      = module.rg.resource_group_loc
+    mv_vng_rg       = module.rg.resource_group_name
+    mv_vng_sku      = var.op_vng_sku
+    mv_vng_type     = var.op_vng_type
+    mv_vng_vpn_type = var.op_vpn_type
+    mv_vng_active_active = var.op_vng_active_active
+    mv_vng_bgp           = var.op_vng_bgp
+    mv_vng_publicip_address_id      = module.op_publicip.publicip_id
+    mv_vng_gateway_subnetid          = module.op_subnet.subnet_id
+}

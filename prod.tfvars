@@ -41,6 +41,27 @@ spoke3_vnet_name = "az_spoke3_vnet"
 spoke3_vnet_add_space = ["10.97.0.0/16"]
 spoke3_subnets        = "10.97.0.0/16"
 
-#public IP
-vng_publicip_name = "vnet-publicip"
-vng_publicip_alloc_method = "Dynamic"
+#HUB public IP
+hub_vng_publicip_name = "hub-vng-publicip"
+hub_vng_publicip_alloc_method = "Dynamic"
+
+#Hub VNG info
+hub_vng_vpn_gateway_name    = "hub-vng"
+hub_vng_sku                 = "Basic"
+hub_vng_type                = "Vpn"
+hub_vpn_type                = "RouteBased"
+hub_vng_active_active           = "false"
+hub_vng_bgp                     = "false"
+
+#HUB public IP
+op_vng_publicip_name = "op-vng-publicip"
+op_vng_publicip_alloc_method = "Dynamic"
+
+#OP VNG info
+op_vng_vpn_gateway_name    = "op-vng"
+op_vng_sku                 = "Basic"
+op_vng_type                = "Vpn"
+op_vpn_type                = "RouteBased"
+op_vng_active_active           = "false"
+op_vng_bgp                     = "false"
+
