@@ -23,6 +23,7 @@ module "hub_subnet" {
     mv_sub_vnet         = module.hub_vnet.virtual_network_name
 }
 
+/*
 module "gateway_subnet" {
   source = "./modules/subnet"
     mv_sub_name         = var.gateway_sub_name
@@ -31,7 +32,7 @@ module "gateway_subnet" {
     mv_sub_addpre       = var.gateway_sub_addpre
     mv_sub_vnet         = module.hub_vnet.virtual_network_name
 }
-
+*/
 module "op_vnet" {
   source = "./modules/vnet"
     mv_vnet_name        = var.op_vnet_name
@@ -129,6 +130,7 @@ module "publicip" {
     mv_publicip_alloc_method    = var.vng_publicip_alloc_method
 }
 
+/*
 module "vnetgateway" {
   source = "./modules/vnetgateway"
     mv_vng_name     = "hub-gateway"
@@ -142,3 +144,4 @@ module "vnetgateway" {
     mv_publicip_add_alloc       = "Dynamic"
     mv_publicip_subnet          = module.gateway_subnet.subnet_id
 }
+*/

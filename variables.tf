@@ -90,7 +90,7 @@ variable "vng_publicip_alloc_method" {
 variable "vng_publicip_name" {
   type = string
 }
-
+/*
 variable "mv_vng_name" {
   type = string
 }
@@ -109,6 +109,7 @@ variable "mv_vng_type" {
 variable "mv_vng_vpn_type" {
   type = string
 }
+*/
 /*
     mv_vng_name     = "hub-gateway"
     mv_vng_loc      = module.rg.resource_group_loc
