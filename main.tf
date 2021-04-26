@@ -49,6 +49,15 @@ module "op_subnet" {
     mv_sub_vnet         = module.op_vnet.virtual_network_name
 }
 
+module "op_gateway_subnet" {
+  source = "./modules/subnet"
+    mv_sub_name         = var.gateway_sub_name
+    mv_sub_loc          = module.rg.resource_group_loc
+    mv_sub_rg           = module.rg.resource_group_name
+    mv_sub_addpre       = var.op_gateway_sub_addpre
+    mv_sub_vnet         = module.op_vnet.virtual_network_name
+}
+
 
 module "spoke1_vnet" {
   source = "./modules/vnet"
@@ -149,7 +158,7 @@ module "hub-vnetgateway" {
     mv_vng_active_active = var.hub_vng_active_active
     mv_vng_bgp           = var.hub_vng_bgp
     mv_vng_publicip_address_id      = module.hub_publicip.publicip_id
-    mv_vng_gateway_subnetid          = module.gateway_subnet.subnet_id
+    mv_vng_gateway_subnetid         = module.gateway_subnet.subnet_id
 }
 
 module "op-vnetgateway" {
@@ -163,5 +172,14 @@ module "op-vnetgateway" {
     mv_vng_active_active = var.op_vng_active_active
     mv_vng_bgp           = var.op_vng_bgp
     mv_vng_publicip_address_id      = module.op_publicip.publicip_id
-    mv_vng_gateway_subnetid          = module.op_subnet.subnet_id
+    mv_vng_gateway_subnetid          = module.op_gateway_subnet.subnet_id
+}
+
+module "op-lng" {
+  source = "./modules/lnetgateway"
+  mv_lng_name                     = var.op_lng_name
+  mv_lng_rg                       = module.rg.resource_group_name
+  mv_lng_loc                      = module.rg.resource_group_loc
+  mv_lng_gateway_address          = module.op_publicip.public_ip_address
+  mv_lng_address_space            = var.lng_address_space
 }

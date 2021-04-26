@@ -19,6 +19,9 @@ op_vnet_add_space = ["192.168.0.0/16"]
 op_sub_name    =   "op_subnet"
 op_sub_addpre  =   ["192.168.1.0/24"]
 
+#Op Gateway Subnet Config
+op_gateway_sub_addpre = ["192.168.2.0/24"]
+
 #spoke 1 vnet config
 spoke1_vnet_name = "az_spoke1_vnet"
 spoke1_vnet_add_space = ["10.99.0.0/16"]
@@ -65,3 +68,6 @@ op_vpn_type                = "RouteBased"
 op_vng_active_active           = "false"
 op_vng_bgp                     = "false"
 
+#OP LNG
+op_lng_name             = "op_lng"
+lng_address_space      = ["192.168.1.0/24"]

@@ -68,6 +68,10 @@ variable "op_sub_addpre" {
   type = list
 }
 
+variable "op_gateway_sub_addpre" {
+  type = list
+}
+
 variable "spoke1_sub_name" {
   type  = string
 }
@@ -145,6 +149,19 @@ variable "op_vng_active_active" {
 }
 variable "op_vng_bgp" {
   type = string
+}
+
+
+#OP LNG
+variable "op_lng_name" {
+  type = string
+}
+/*
+variable "lng_gateway_address" {
+  type = string
+}
+*/
+variable "lng_address_space" {
 }
 
 /*
